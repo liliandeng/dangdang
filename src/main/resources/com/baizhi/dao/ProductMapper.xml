@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.ProductDao">
+
+    <resultMap id="pMap" type="Product">
+        <id column="book_id" property="id"/>
+        <result column="cid" property="cid"/>
+        <result column="book_name" property="name"/>
+        <result column="book_price" property="price"/>
+        <result column="groundingDate" property="btime"/>
+        <result column="book_state" property="bstate"/>
+        <result column="inventory" property="inventory"/>
+        <result column="author" property="author"/>
+        <result column="press" property="press"/>
+        <result column="editNum" property="num"/>
+        <result column="print_date" property="ptime"/>
+        <result column="print_count" property="pcount"/>
+        <result column="ISBN" property="isbn"/>
+        <result column="word_count" property="wcount"/>
+        <result column="page_count" property="pagecount"/>
+        <result column="style" property="style"/>
+        <result column="page" property="pages"/>
+        <result column="pack" property="pack"/>
+        <result column="salenum" property="salenum"/>
+        <result column="custome_score" property="cscore"/>
+        <result column="recommend" property="recommend"/>
+        <result column="messages" property="messages"/>
+        <result column="author_msg" property="authormsg"/>
+        <result column="list" property="lists"/>
+        <result column="media_comment" property="mediacommend"/>
+        <result column="imagePath" property="imgpath"/>
+        <result column="series_name" property="seriesname"/>
+        <result column="Dangprice" property="dprice"/>
+        <result column="product_image" property="productimg"/>
+        <!--多对一查询-->
+        <association property="cate" javaType="Category">
+            <id column="category_id" property="cid"/>
+            <result column="parent_id" property="pid"/>
+            <result column="category_name" property="cname"/>
+            <result column="count" property="count"/>
+            <result column="category_type" property="ctype"/>
+        </association>
+
+    </resultMap>
+
+    <select id="selectAllByPage" resultMap="pMap">
+      select p.*,c.* from dd_product p left JOIN dd_category c
+        on p.cid=c.category_id LIMIT #{start},#{end}
+    </select>
+
+    <select id="selectCount" resultType="int">
+        select count(*) from dd_product
+    </select>
+    <delete id="delete">
+        delete from dd_product where book_id in
+        <foreach collection="array" open="(" close=")" separator="," item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+    <insert id="add">
+        insert into dd_product (book_id,cid,book_name,book_price,groundingDate,imagePath,product_image)
+          value (0,#{cid},#{name},#{price},SYSDATE(),'1.jpg','1.jpg');
+    </insert>
+
+    <select id="selectOne" resultMap="pMap">
+        select * from dd_product where book_id=#{id}
+
+    </select>
+    <update id="update">
+        update dd_product set cid=#{cid},book_name=#{name},imagePath='2.jpg',product_image='2.jpg'
+        where book_id=#{id}
+
+    </update>
+</mapper>

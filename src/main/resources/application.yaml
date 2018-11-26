@@ -1,0 +1,33 @@
+server:
+  port: 8989
+  context-path: /dangdangw
+  #jsp页面热部署问题
+  jsp-servlet:
+    init-parameters:
+      development: true
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url:  jdbc:mysql://localhost:3306/ddm
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+  #配置视图解析器
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+      #设置编码格式
+      #http:
+
+      #文件上传
+      #multipart:
+      # max-file-size: 10Mb #上传文件的大小
+      #max-request-size: 100Mb #同时上传的最大量(最大请求大小)
+
+
+
+mybatis:
+  mapper-locations: com/baizhi/dao/*Mapper.xml #指定mapper文件位置
+  type-aliases-package: com.baizhi.entity
