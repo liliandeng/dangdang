@@ -23,6 +23,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     -->
+        <start-class>com.baizhi.App</start-class>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
     </properties>
 
     <!--spring boot 父类依赖  放在dependencies外面-->
@@ -40,18 +44,19 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- web -->
+        <!-- web 默认启动 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 测试 -->
+        <!-- 测试 默认启动-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
 
         <!--整合mybatis-->
         <dependency>
@@ -160,7 +165,17 @@
             <scope>provided</scope>
         </dependency>
 
+
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>DaIston.RC1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <finalName>dangdangw</finalName>

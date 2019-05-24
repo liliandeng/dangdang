@@ -71,6 +71,5 @@
     <update id="update">
         update dd_product set cid=#{cid},book_name=#{name},imagePath='2.jpg',product_image='2.jpg'
         where book_id=#{id}
-
     </update>
 </mapper>
